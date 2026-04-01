@@ -1,21 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import {Link} from "expo-router";
 
 export default function Index() {
     return (
-        <View style={styles.container}>
-            <Text>Open up app/index.tsx to start working on your app!</Text>
-            <Text>victory 2027</Text>
+        <View className="flex-1 items-center justify-center bg-white">
+            <Text className="text-center text-base text-neutral-800">
+                Відкрийте app/index.tsx, щоб почати працювати над застосунком!
+            </Text>
+            <Text className="mt-2 text-xl font-bold text-blue-600">victory 2028</Text>
+            <Link href="/profile">Go to Profile</Link>
             <StatusBar style="auto" />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
