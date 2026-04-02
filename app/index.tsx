@@ -10,7 +10,7 @@ export default function Index() {
             <Header className='mt-7.5 mb-4 flex gap-6'>
               <HeaderContent />
             </Header>
-            <View className='flex-1 items-center justify-center bg-white' style={{ borderTopLeftRadius: 24, borderTopRightRadius: 24 }}>
+            <View className='flex-1 bg-white pt-7 px-6' style={{ borderTopLeftRadius: 24, borderTopRightRadius: 24 }}>
             <Link href="/profile">Go to Profile1</Link>
             <StatusBar style="auto" />
             </View>

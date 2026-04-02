@@ -11,7 +11,7 @@ const MenuBar = () => {
 
     return (
         <View className='w-full'>
-            <View className='bg-orange-primary rounded-t-3xl w-full py-3 flex-row items-center justify-around'>
+            <View className='bg-orange-primary rounded-t-3xl w-full px-6 py-3 flex-row items-center justify-around'>
                 <HomeIcon width={32} height={32} />
                 <MenuIcon width={40} height={40} />
                 <HeartIcon width={40} height={40} />
