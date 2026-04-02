@@ -12,7 +12,7 @@ const Header = ({ children, className }: HeaderProps) => {
 
     return (
         <View className='bg-yellow-primary w-full' style={{ paddingTop: top }}>
-            <View className={cn('h-16 px-4 flex-row items-center justify-between', className)}>
+            <View className={cn('h-32 px-4 flex-row items-center justify-between', className)}>
                 {children}
             </View>
         </View>
