@@ -6,7 +6,7 @@ import UserIcon from "@/assets/svg/user.svg";
 
 const HeaderContent = () => {
     return (
-        <View className='min-h-full'>
+        <View className='w-full'>
             <View className='flex flex-row items-center justify-between w-full gap-6 mt-7 mb-4'>
                 <SearchInput />
                 <View className='flex-row items-center gap-2'>
