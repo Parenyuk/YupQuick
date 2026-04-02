@@ -22,7 +22,7 @@ const HeaderContent = () => {
                 </View>
             </View>
             <View className='flex items-start'>
-                <Text className='text-white text-3xl font-bold'> Good Morning</Text>
+                <Text className='text-white text-4xl font-bold'>Good Morning</Text>
                 <Text className='text-orange-primary font-medium'>Rise and shine! It's breakfast time</Text>
             </View>
         </View>
