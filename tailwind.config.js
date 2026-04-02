@@ -13,6 +13,7 @@ module.exports = {
                 'yellow-second': '#F3E9B5',
                 'orange-primary': '#E95322',
                 'orange-second': '#FFDECF',
+                'orange-lite': '#FFD8C7',
                 'font-primary': '#391713',
                 'font-second': '#F8F8F8',
             },

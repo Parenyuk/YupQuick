@@ -17,7 +17,6 @@ const MenuBar = () => {
                 <HeartIcon width={40} height={40} />
                 <ListIcon width={40} height={40} />
                 <SupportIcon width={40} height={40} />
-
             </View>
             <View className='bg-white' style={{ height: bottom }} />
         </View>
