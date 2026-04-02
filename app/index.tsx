@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import {Link} from "expo-router";
-import MenuBar from "../src/components/units/MenuBar";
 
 export default function Index() {
     return (
@@ -11,7 +10,7 @@ export default function Index() {
             </Text>
             <Text className="mt-2 text-xl font-bold text-blue-600">victory 2028</Text>
             <Link href="/profile">Go to Profile</Link>
-            <MenuBar />
+
             <StatusBar style="auto" />
         </View>
     );
