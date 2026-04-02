@@ -12,7 +12,7 @@ export default function RootLayout() {
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
                     <Stack>
-                        <Stack.Screen name="index" options={{ title: 'YupQuick' }} />
+                        <Stack.Screen name="index" options={{ headerShown: false }} />
                     </Stack>
                     <MenuBar />
                 </View>

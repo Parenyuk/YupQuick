@@ -4,6 +4,10 @@ module.exports = {
     presets: [require('nativewind/preset')],
     theme: {
         extend: {
+            spacing: {
+                '6.5': '26px',
+                '7.5': '30px',
+            },
             colors: {
                 'yellow-primary': '#F5CB58',
                 'yellow-second': '#F3E9B5',
