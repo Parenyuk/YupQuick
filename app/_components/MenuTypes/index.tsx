@@ -19,15 +19,12 @@ const MenuTypes = () => {
     return (
         <View className='flex-row justify-between gap-5 pb-4 border-b border-orange-lite'>
             {menuTypeArr.map(item => (
-                <View className='items-center gap-1'>
+                <View className='items-center gap-1' key={item.id}>
                     <View key={item.id} className=' gap-1 bg-yellow-second px-2 py-3 rounded-full'>
                         <Image source={item.icon} className='w-10 h-10' resizeMode='contain' />
                     </View>
                     <Text className='text-sm text-font-primary'>{item.title}</Text>
                 </View>
-
-
-
             ))}
         </View>
     )

@@ -4,6 +4,7 @@ import { Link } from "expo-router";
 import Header from "../src/components/units/Header";
 import HeaderContent from "@/app/_components/HeaderContent";
 import MenuTypes from "@/app/_components/MenuTypes";
+import BestSellerBlock from "@/app/_components/BestSellerBlock";
 
 export default function Index() {
     return (
@@ -13,6 +14,7 @@ export default function Index() {
             </Header>
             <View className='flex-1 bg-white pt-7 px-6' style={{ borderTopLeftRadius: 24, borderTopRightRadius: 24 }}>
                 <MenuTypes />
+                <BestSellerBlock />
             <Link href="/profile">Go to Profile1</Link>
             <StatusBar style="auto" />
             </View>
