@@ -13,7 +13,7 @@ const BestSellerBlock = () => {
     ];
 
     return (
-        <View className="flex-row items-start justify-between gap-4 self-start mt-4">
+        <View className="flex-row items-start justify-between gap-4 mt-4">
             {bestSellerArr.map(item => (
                 <View key={item.id}>
                     <Image
