@@ -1,18 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import {Link} from "expo-router";
-import MenuBar from "../src/components/units/MenuBar";
+import { ScrollView, View } from 'react-native';
+import { Link } from "expo-router";
+import Header from "../src/components/units/Header";
+import HeaderContent from "@/app/_components/HeaderContent";
+import MenuTypes from "@/app/_components/MenuTypes";
+import BestSellerBlock from "@/app/_components/BestSellerBlock";
+import HomePageBanner from "@/app/_components/HomePageBanner";
+import RecommendBlock from "@/app/_components/RecommendBlock";
 
 export default function Index() {
     return (
-        <View className="flex-1 items-center justify-center bg-white">
-            <Text className="text-center text-base text-neutral-800">
-                Відкрийте app/index.tsx, щоб почати працювати над застосунком!
-            </Text>
-            <Text className="mt-2 text-xl font-bold text-blue-600">victory 2028</Text>
-            <Link href="/profile">Go to Profile</Link>
-            <MenuBar />
-            <StatusBar style="auto" />
+        <View className="flex-1 bg-yellow-primary">
+            <Header className='mt-7.5 mb-4 flex gap-6'>
+              <HeaderContent />
+            </Header>
+            <ScrollView className='flex-1 bg-white rounded-t-3xl' contentContainerClassName='pt-7 px-6 pb-6'>
+                <MenuTypes />
+                <BestSellerBlock />
+                <HomePageBanner />
+                <RecommendBlock />
+                <Link href="/profile">Go to Profile1</Link>
+                <StatusBar style="auto" />
+            </ScrollView>
         </View>
     );
 }
