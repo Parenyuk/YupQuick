@@ -5,6 +5,7 @@ import Header from "../src/components/units/Header";
 import HeaderContent from "@/app/_components/HeaderContent";
 import MenuTypes from "@/app/_components/MenuTypes";
 import BestSellerBlock from "@/app/_components/BestSellerBlock";
+import HomePageBanner from "@/app/_components/HomePageBanner";
 
 export default function Index() {
     return (
@@ -15,6 +16,7 @@ export default function Index() {
             <View className='flex-1 bg-white pt-7 px-6' style={{ borderTopLeftRadius: 24, borderTopRightRadius: 24 }}>
                 <MenuTypes />
                 <BestSellerBlock />
+                <HomePageBanner />
             <Link href="/profile">Go to Profile1</Link>
             <StatusBar style="auto" />
             </View>
