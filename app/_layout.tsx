@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MenuBar from "../src/components/units/MenuBar";
 
 export default function RootLayout() {
+
     return (
         <SafeAreaProvider>
             <GestureHandlerRootView style={{ flex: 1 }}>
