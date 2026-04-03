@@ -6,11 +6,11 @@ import DessertTwoImg from "@/assets/png/dessert-2.png";
 import {Link} from "expo-router";
 
 const BestSellerBlock = () => {
-    const bestSellerArr: { id: number; icon: ImageSourcePropType }[] = [
-        { id: 0, icon: SushiImg },
-        { id: 1, icon: RiceImg },
-        { id: 2, icon: DessertOneImg },
-        { id: 3, icon: DessertTwoImg },
+    const bestSellerArr: { id: number; icon: ImageSourcePropType; price: string }[] = [
+        { id: 0, icon: SushiImg, price: "$12.99" },
+        { id: 1, icon: RiceImg, price: "$8.49" },
+        { id: 2, icon: DessertOneImg, price: "$6.99" },
+        { id: 3, icon: DessertTwoImg, price: "$9.50" },
     ];
 
     return (
@@ -22,12 +22,15 @@ const BestSellerBlock = () => {
 
             <View className="flex-row items-start justify-between gap-4 mt-4">
                 {bestSellerArr.map(item => (
-                    <View key={item.id}>
+                    <View key={item.id} className="relative">
                         <Image
                             source={item.icon}
                             className="w-20 h-28"
                             resizeMode="contain"
                         />
+                        <View className="absolute bottom-0 right-0 bg-orange-primary px-1.5 py-0.5 rounded-lg">
+                            <Text className="text-white text-xs font-semibold">{item.price}</Text>
+                        </View>
                     </View>
                 ))}
             </View>

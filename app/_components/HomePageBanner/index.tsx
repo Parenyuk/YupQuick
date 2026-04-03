@@ -34,14 +34,13 @@ const HomePageBanner = () => {
                 renderItem={({ item }) => (
                     <Image
                         source={item}
-                        style={{ width }}
-                        className="h-32 rounded-2xl"
+                        style={{ width, height: 128, borderRadius: 16 }}
                         resizeMode="cover"
                     />
                 )}
             />
             <View className="flex-row justify-center gap-1 mt-2">
-                {banners.map((_, i) => (
+                {banners.map((_item, i) => (
                     <View
                         key={i}
                         className={`h-1 rounded-full ${i === activeIndex ? "w-6 bg-orange-primary" : "w-2 bg-orange-second"}`}
