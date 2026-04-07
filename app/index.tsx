@@ -1,39 +1,25 @@
+import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, ScrollView, View, Text } from 'react-native';
-import { Link } from "expo-router";
+import { ScrollView, View } from 'react-native';
+import { Link, router } from "expo-router";
+import { ROUTES } from "@/src/constants/routes";
 import Header from "../src/components/units/Header";
 import HeaderContent from "@/app/_components/HeaderContent";
 import MenuTypes from "@/app/_components/MenuTypes";
 import BestSellerBlock from "@/app/_components/BestSellerBlock";
 import HomePageBanner from "@/app/_components/HomePageBanner";
 import RecommendBlock from "@/app/_components/RecommendBlock";
-import Logo from "@/assets/png/Logo.png";
-import { APP_NAME } from "@/src/constants/appInfo";
-import ButtonComponent from "@/src/components/elements/Buttons/ButtonComponent";
 
 export default function Index() {
+    const auth = false;
 
+    useEffect(() => {
+        if (!auth) {
+            router.replace(ROUTES.LOGIN());
+        }
+    }, [auth]);
 
-    const auth = true;
-
-    const slogan = 'Order fresh meals in seconds, enjoy quick delivery and discover flavors from your city.';
-    if (!auth) {
-        return (
-            <View className='flex-1 bg-orange-primary items-center justify-center'>
-                <Image source={Logo} resizeMode='contain' />
-                <View className='my-5 uppercase'>
-                    <Text className='text-orange-primary'>{APP_NAME.first}</Text>
-                    <Text className='text-white'>{APP_NAME.second}</Text>
-                    <Text className='text-white' >{slogan}</Text>
-                    <View className='mt-6 gap-3'>
-                        <ButtonComponent label='Log in' variant='primary' />
-                        <ButtonComponent label='Sign Up' variant='secondary' />
-                    </View>
-                </View>
-
-            </View>
-            )
-    }
+    if (!auth) return null;
 
 
     return (
@@ -46,7 +32,7 @@ export default function Index() {
                 <BestSellerBlock />
                 <HomePageBanner />
                 <RecommendBlock />
-                <Link href="/profile">Go to Profile1</Link>
+                <Link href={ROUTES.PROFILE()}>Go to Profile1</Link>
                 <StatusBar style="auto" />
             </ScrollView>
         </View>
