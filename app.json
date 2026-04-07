@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "YupQuick",
-    "slug": "YupQuick",
-    "scheme": "yupquick",
+    "name": "YumQuick",
+    "slug": "YumQuick",
+    "scheme": "yumquick",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon-new.png",
@@ -23,7 +23,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.YupQuick"
+      "package": "com.anonymous.YumQuick"
     },
     "web": {
       "bundler": "metro",
