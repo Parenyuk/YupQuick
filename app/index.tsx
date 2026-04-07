@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, View } from 'react-native';
-import { Link, router } from "expo-router";
+import { Link, Redirect } from "expo-router";
 import { ROUTES } from "@/src/constants/routes";
 import Header from "../src/components/units/Header";
 import HeaderContent from "@/app/_components/HeaderContent";
@@ -13,13 +12,7 @@ import RecommendBlock from "@/app/_components/RecommendBlock";
 export default function Index() {
     const auth = false;
 
-    useEffect(() => {
-        if (!auth) {
-            router.replace(ROUTES.LOGIN());
-        }
-    }, [auth]);
-
-    if (!auth) return null;
+    if (!auth) return <Redirect href={ROUTES.LOGIN()} />;
 
 
     return (
