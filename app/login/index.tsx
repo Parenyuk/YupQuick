@@ -85,7 +85,7 @@ export default function LoginPage() {
     if (biometricView) {
         return (
             <View className='flex-1 bg-yellow-primary'>
-                <Header title='Log In' showBack onBack={() => setBiometricView(false)} />
+                <Header title='Set Your Fingerprint' showBack onBack={() => setBiometricView(false)} />
 
                 <PageScrollView contentContainerClassName='items-center justify-center flex-1'>
                     <TouchableOpacity activeOpacity={0.7} onPress={handleBiometric}>
@@ -200,12 +200,19 @@ export default function LoginPage() {
 
                     {/* Social + Biometric */}
                     <View className='flex-row justify-center gap-4'>
-                        <SocialButton Icon={GmailIcon} onPress={async () => {
-                            await auth.login();
-                            router.replace(ROUTES.HOME());
-                        }} />
+                        <SocialButton Icon={GmailIcon} onPress={handleGoogleLogin} />
                         <SocialButton Icon={FacebookIcon} />
                         <SocialButton Icon={MarkIcon} onPress={() => setBiometricView(true)} />
+                        <TouchableOpacity
+                            className='w-9 h-9 bg-orange-primary/10 rounded-full items-center justify-center'
+                            activeOpacity={0.7}
+                            onPress={async () => {
+                                await auth.login();
+                                router.replace(ROUTES.HOME());
+                            }}
+                        >
+                            <Text className='text-orange-primary font-bold text-sm'>T</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View className='flex-row justify-center mt-6 gap-1'>
