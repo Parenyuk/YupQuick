@@ -3,8 +3,6 @@ import {
     View,
     Text,
     TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform,
     Alert,
 } from 'react-native';
 import { router } from 'expo-router';
@@ -16,8 +14,12 @@ import FormInput from '@/src/components/forms/FormInput';
 import ButtonComponent from '@/src/components/elements/Buttons/ButtonComponent';
 import Header from '@/src/components/units/Header';
 import PageScrollView from '@/src/components/units/PageScrollView';
+import SocialButton from '@/src/components/elements/Buttons/SocialButton';
 import EyeIcon from '@/assets/svg/eye.svg';
 import EyeOffIcon from '@/assets/svg/eye-off.svg';
+import GmailIcon from '@/assets/svg/login/Gmail.svg';
+import FacebookIcon from '@/assets/svg/login/Facebook.svg';
+import MarkIcon from '@/assets/svg/login/Mark.svg';
 import { ROUTES } from '@/src/constants/routes';
 
 const loginSchema = z.object({
@@ -62,14 +64,10 @@ export default function LoginPage() {
         <View className='flex-1 bg-yellow-primary'>
             <Header title='Log In' showBack />
 
-            <KeyboardAvoidingView
-                className='flex-1 bg-gray-50 rounded-t-3xl'
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            <PageScrollView
+                keyboardAware
+                keyboardShouldPersistTaps='handled'
             >
-                <PageScrollView
-                    keyboardShouldPersistTaps='handled'
-                    className='bg-gray-50 rounded-t-none'
-                >
                     {/* Welcome section */}
                     <View className='mb-6'>
                         <Text className='text-font-primary text-2xl font-bold mb-2'>Welcome</Text>
@@ -141,44 +139,25 @@ export default function LoginPage() {
                     </View>
 
                     {/* Divider */}
-                    <View className='items-center my-6'>
+                    <View className='items-center my-4'>
                         <Text className='text-gray-400 text-sm'>or sign up with</Text>
                     </View>
 
                     {/* Social + Biometric */}
                     <View className='flex-row justify-center gap-4'>
-                        <TouchableOpacity
-                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
-                            activeOpacity={0.7}
-                        >
-                            <Text className='font-bold text-2xl' style={{ color: '#4285F4' }}>G</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
-                            activeOpacity={0.7}
-                        >
-                            <Text className='font-bold text-2xl' style={{ color: '#1877F2' }}>f</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
-                            activeOpacity={0.7}
-                            onPress={handleBiometric}
-                        >
-                            <Text className='text-3xl'>👆</Text>
-                        </TouchableOpacity>
+                        <SocialButton Icon={GmailIcon} />
+                        <SocialButton Icon={FacebookIcon} />
+                        <SocialButton Icon={MarkIcon} onPress={handleBiometric} />
                     </View>
 
-                    {/* Sign up */}
-                    <View className='flex-row justify-center mt-8 gap-1'>
+
+                    <View className='flex-row justify-center mt-6 gap-1'>
                         <Text className='text-gray-400 text-sm'>Don't have an account?</Text>
                         <TouchableOpacity activeOpacity={0.7}>
                             <Text className='text-orange-primary text-sm font-semibold'>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
-                </PageScrollView>
-            </KeyboardAvoidingView>
+            </PageScrollView>
         </View>
     );
 }

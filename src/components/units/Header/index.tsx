@@ -16,7 +16,7 @@ const Header = ({ children, className, title, showBack, onBack }: HeaderProps) =
 
     return (
         <View className='bg-yellow-primary w-full' style={{ paddingTop: top }}>
-            <View className={cn('px-6 h-48 flex justify-center gap-6', className)}>
+            <View className={cn('px-6 h-44 flex justify-center gap-6', className)}>
                 {showBack && (
                     <View className='flex-row items-center'>
                         <TouchableOpacity
