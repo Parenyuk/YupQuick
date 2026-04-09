@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -24,6 +24,7 @@ import MarkIcon from '@/assets/svg/login/Mark.svg';
 import MarkImage from '@/assets/png/login/Mark.png';
 import { ROUTES } from '@/src/constants/routes';
 import { auth } from '@/src/lib/auth';
+import { useGoogleAuth } from '@/src/lib/google-auth';
 
 const loginSchema = z.object({
     email: z.string().email('Enter a valid email'),
@@ -35,10 +36,25 @@ type LoginForm = z.infer<typeof loginSchema>;
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [biometricView, setBiometricView] = useState(false);
+    const { response, promptAsync } = useGoogleAuth();
 
     const { control, handleSubmit, formState: { errors } } = useForm<LoginForm>({
         resolver: zodResolver(loginSchema),
     });
+
+    useEffect(() => {
+        if (response?.type === 'success') {
+            const handleGoogleLogin = async () => {
+                await auth.login();
+                router.replace(ROUTES.HOME());
+            };
+            handleGoogleLogin();
+        }
+    }, [response]);
+
+    const handleGoogleLogin = () => {
+        promptAsync();
+    };
 
     const onSubmit = async (_data: LoginForm) => {
         await auth.login();
@@ -184,7 +200,10 @@ export default function LoginPage() {
 
                     {/* Social + Biometric */}
                     <View className='flex-row justify-center gap-4'>
-                        <SocialButton Icon={GmailIcon} />
+                        <SocialButton Icon={GmailIcon} onPress={async () => {
+                            await auth.login();
+                            router.replace(ROUTES.HOME());
+                        }} />
                         <SocialButton Icon={FacebookIcon} />
                         <SocialButton Icon={MarkIcon} onPress={() => setBiometricView(true)} />
                     </View>

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "YumQuick",
-    "slug": "YumQuick",
+    "slug": "yumquick",
     "scheme": "yumquick",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -40,7 +40,15 @@
           "resizeMode": "cover"
         }
       ],
-      "expo-secure-store"
-    ]
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3ba35948-f490-43f7-82e5-cb2732f20e4a"
+      }
+    },
+    "owner": "victory94"
   }
 }
