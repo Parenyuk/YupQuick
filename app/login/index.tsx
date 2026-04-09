@@ -3,7 +3,6 @@ import {
     View,
     Text,
     TouchableOpacity,
-    ScrollView,
     KeyboardAvoidingView,
     Platform,
     Alert,
@@ -12,12 +11,11 @@ import { router } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as LocalAuthentication from 'expo-local-authentication';
 import FormInput from '@/src/components/forms/FormInput';
 import ButtonComponent from '@/src/components/elements/Buttons/ButtonComponent';
-import LockIcon from '@/assets/svg/lock.svg';
-import PersonIcon from '@/assets/svg/person.svg';
+import Header from '@/src/components/units/Header';
+import PageScrollView from '@/src/components/units/PageScrollView';
 import EyeIcon from '@/assets/svg/eye.svg';
 import EyeOffIcon from '@/assets/svg/eye-off.svg';
 import { ROUTES } from '@/src/constants/routes';
@@ -30,7 +28,6 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
-    const { top } = useSafeAreaInsets();
     const [showPassword, setShowPassword] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm<LoginForm>({
@@ -62,136 +59,126 @@ export default function LoginPage() {
     };
 
     return (
-        <KeyboardAvoidingView
-            className='flex-1 bg-white'
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
-            <ScrollView
-                className='flex-1'
-                contentContainerStyle={{ paddingTop: top + 16, paddingBottom: 32 }}
-                showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps='handled'
+        <View className='flex-1 bg-yellow-primary'>
+            <Header title='Log In' showBack />
+
+            <KeyboardAvoidingView
+                className='flex-1 bg-gray-50 rounded-t-3xl'
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                {/* Back button */}
-                <TouchableOpacity
-                    className='mx-6 mb-6 w-10 h-10 rounded-full bg-orange-second items-center justify-center'
-                    onPress={() => router.back()}
-                    activeOpacity={0.7}
+                <PageScrollView
+                    keyboardShouldPersistTaps='handled'
+                    className='bg-gray-50 rounded-t-none'
                 >
-                    <Text className='text-font-primary text-lg font-bold'>←</Text>
-                </TouchableOpacity>
-
-                {/* Title */}
-                <View className='px-6 mb-8'>
-                    <Text className='text-font-primary text-3xl font-bold mb-1'>Welcome back!</Text>
-                    <Text className='text-gray-400 text-sm'>Sign in to continue ordering</Text>
-                </View>
-
-                {/* Form */}
-                <View className='px-6 gap-4'>
-                    <Controller
-                        control={control}
-                        name='email'
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <FormInput
-                                label='Email'
-                                placeholder='your@email.com'
-                                keyboardType='email-address'
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                                error={errors.email?.message}
-                                leftIcon={<PersonIcon width={18} height={20} />}
-                            />
-                        )}
-                    />
-
-                    <Controller
-                        control={control}
-                        name='password'
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <FormInput
-                                label='Password'
-                                placeholder='••••••••'
-                                secureTextEntry={!showPassword}
-                                autoCapitalize='none'
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                                error={errors.password?.message}
-                                leftIcon={<LockIcon width={18} height={22} />}
-                                rightIcon={
-                                    showPassword
-                                        ? <EyeIcon width={20} height={16} />
-                                        : <EyeOffIcon width={20} height={16} />
-                                }
-                                onRightIconPress={() => setShowPassword(prev => !prev)}
-                            />
-                        )}
-                    />
-
-                    <TouchableOpacity className='self-end' activeOpacity={0.7}>
-                        <Text className='text-orange-primary text-sm font-semibold'>
-                            Forgot password?
+                    {/* Welcome section */}
+                    <View className='mb-6'>
+                        <Text className='text-font-primary text-2xl font-bold mb-2'>Welcome</Text>
+                        <Text className='text-gray-500 text-sm leading-5'>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
 
-                {/* Log In button */}
-                <View className='px-6 mt-6'>
-                    <ButtonComponent
-                        label='Log In'
-                        variant='primary'
-                        className='w-full py-4'
-                        onPress={handleSubmit(onSubmit)}
-                    />
-                </View>
+                    {/* Form */}
+                    <View className='gap-4'>
+                        <Controller
+                            control={control}
+                            name='email'
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <FormInput
+                                    label='Email or Mobile Number'
+                                    placeholder='example@example.com'
+                                    keyboardType='email-address'
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    error={errors.email?.message}
+                                />
+                            )}
+                        />
 
-                {/* Divider */}
-                <View className='flex-row items-center mx-6 my-6 gap-3'>
-                    <View className='flex-1 h-px bg-gray-200' />
-                    <Text className='text-gray-400 text-sm'>or sign in with</Text>
-                    <View className='flex-1 h-px bg-gray-200' />
-                </View>
+                        <Controller
+                            control={control}
+                            name='password'
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <FormInput
+                                    label='Password'
+                                    placeholder='**************'
+                                    secureTextEntry={!showPassword}
+                                    autoCapitalize='none'
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    error={errors.password?.message}
+                                    rightIcon={
+                                        <View className='bg-orange-primary/10 rounded-full p-2'>
+                                            {showPassword
+                                                ? <EyeIcon width={20} height={16} />
+                                                : <EyeOffIcon width={20} height={16} />}
+                                        </View>
+                                    }
+                                    onRightIconPress={() => setShowPassword(prev => !prev)}
+                                />
+                            )}
+                        />
 
-                {/* Social + Biometric */}
-                <View className='px-6 flex-row gap-3'>
-                    <TouchableOpacity
-                        className='flex-1 flex-row items-center justify-center gap-2 border border-gray-200 rounded-2xl py-3.5'
-                        activeOpacity={0.7}
-                    >
-                        <Text className='font-bold text-lg' style={{ color: '#4285F4' }}>G</Text>
-                        <Text className='text-font-primary font-semibold text-sm'>Google</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity className='self-end' activeOpacity={0.7}>
+                            <Text className='text-orange-primary text-sm font-semibold'>
+                                Forgot password?
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
-                    <TouchableOpacity
-                        className='flex-1 flex-row items-center justify-center gap-2 border border-gray-200 rounded-2xl py-3.5'
-                        activeOpacity={0.7}
-                    >
-                        <Text className='font-bold text-lg' style={{ color: '#1877F2' }}>f</Text>
-                        <Text className='text-font-primary font-semibold text-sm'>Facebook</Text>
-                    </TouchableOpacity>
+                    {/* Log In button */}
+                    <View className='mt-6'>
+                        <ButtonComponent
+                            label='Log In'
+                            variant='primary'
+                            className='w-full py-4'
+                            onPress={handleSubmit(onSubmit)}
+                        />
+                    </View>
 
-                    <TouchableOpacity
-                        className='flex-1 flex-row items-center justify-center gap-2 border border-gray-200 rounded-2xl py-3.5'
-                        activeOpacity={0.7}
-                        onPress={handleBiometric}
-                    >
-                        <Text className='text-xl'>&#x1F9B6;</Text>
-                        <Text className='text-font-primary font-semibold text-sm'>Touch ID</Text>
-                    </TouchableOpacity>
-                </View>
+                    {/* Divider */}
+                    <View className='items-center my-6'>
+                        <Text className='text-gray-400 text-sm'>or sign up with</Text>
+                    </View>
 
-                {/* Sign up */}
-                <View className='flex-row justify-center mt-8 gap-1'>
-                    <Text className='text-gray-400 text-sm'>Don't have an account?</Text>
-                    <TouchableOpacity activeOpacity={0.7}>
-                        <Text className='text-orange-primary text-sm font-semibold'>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                    {/* Social + Biometric */}
+                    <View className='flex-row justify-center gap-4'>
+                        <TouchableOpacity
+                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
+                            activeOpacity={0.7}
+                        >
+                            <Text className='font-bold text-2xl' style={{ color: '#4285F4' }}>G</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
+                            activeOpacity={0.7}
+                        >
+                            <Text className='font-bold text-2xl' style={{ color: '#1877F2' }}>f</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            className='w-14 h-14 bg-orange-primary/10 rounded-full items-center justify-center'
+                            activeOpacity={0.7}
+                            onPress={handleBiometric}
+                        >
+                            <Text className='text-3xl'>👆</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Sign up */}
+                    <View className='flex-row justify-center mt-8 gap-1'>
+                        <Text className='text-gray-400 text-sm'>Don't have an account?</Text>
+                        <TouchableOpacity activeOpacity={0.7}>
+                            <Text className='text-orange-primary text-sm font-semibold'>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                </PageScrollView>
+            </KeyboardAvoidingView>
+        </View>
     );
 }

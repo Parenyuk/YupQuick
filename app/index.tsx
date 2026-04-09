@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { Link, Redirect } from "expo-router";
 import { ROUTES } from "@/src/constants/routes";
 import Header from "../src/components/units/Header";
 import HeaderContent from "@/app/_components/HeaderContent";
+import PageScrollView from "@/src/components/units/PageScrollView";
 import MenuTypes from "@/app/_components/MenuTypes";
 import BestSellerBlock from "@/app/_components/BestSellerBlock";
 import HomePageBanner from "@/app/_components/HomePageBanner";
@@ -17,17 +18,17 @@ export default function Index() {
 
     return (
         <View className="flex-1 bg-yellow-primary">
-            <Header className='mt-7.5 mb-4 flex gap-6'>
+            <Header>
               <HeaderContent />
             </Header>
-            <ScrollView className='flex-1 bg-white rounded-t-3xl' contentContainerClassName='pt-7 px-6 pb-6'>
+            <PageScrollView>
                 <MenuTypes />
                 <BestSellerBlock />
                 <HomePageBanner />
                 <RecommendBlock />
                 <Link href={ROUTES.PROFILE()}>Go to Profile1</Link>
                 <StatusBar style="auto" />
-            </ScrollView>
+            </PageScrollView>
         </View>
     );
 }

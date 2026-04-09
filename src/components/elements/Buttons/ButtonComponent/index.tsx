@@ -10,8 +10,8 @@ type ButtonProps = TouchableOpacityProps & {
 
 const variantStyles: Record<ButtonVariant, { container: string; text: string }> = {
     primary: {
-        container: "bg-yellow-primary",
-        text: "text-orange-primary",
+        container: "bg-orange-primary",
+        text: "text-white",
     },
     secondary: {
         container: "bg-yellow-secondary",
