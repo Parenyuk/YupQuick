@@ -39,7 +39,8 @@
           "imageWidth": 200,
           "resizeMode": "cover"
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }

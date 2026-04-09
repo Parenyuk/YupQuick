@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
     View,
     Text,
+    Image,
     TouchableOpacity,
     Alert,
 } from 'react-native';
@@ -20,7 +21,9 @@ import EyeOffIcon from '@/assets/svg/eye-off.svg';
 import GmailIcon from '@/assets/svg/login/Gmail.svg';
 import FacebookIcon from '@/assets/svg/login/Facebook.svg';
 import MarkIcon from '@/assets/svg/login/Mark.svg';
+import MarkImage from '@/assets/png/login/Mark.png';
 import { ROUTES } from '@/src/constants/routes';
+import { auth } from '@/src/lib/auth';
 
 const loginSchema = z.object({
     email: z.string().email('Enter a valid email'),
@@ -31,12 +34,14 @@ type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [biometricView, setBiometricView] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm<LoginForm>({
         resolver: zodResolver(loginSchema),
     });
 
-    const onSubmit = (_data: LoginForm) => {
+    const onSubmit = async (_data: LoginForm) => {
+        await auth.login();
         router.replace(ROUTES.HOME());
     };
 
@@ -56,9 +61,43 @@ export default function LoginPage() {
             fallbackLabel: 'Use password',
         });
         if (result.success) {
+            await auth.login();
             router.replace(ROUTES.HOME());
         }
     };
+
+    if (biometricView) {
+        return (
+            <View className='flex-1 bg-yellow-primary'>
+                <Header title='Log In' showBack onBack={() => setBiometricView(false)} />
+
+                <PageScrollView contentContainerClassName='items-center justify-center flex-1'>
+                    <TouchableOpacity activeOpacity={0.7} onPress={handleBiometric}>
+                        <Image
+                            source={MarkImage}
+                            className='w-64 h-64'
+                            resizeMode='contain'
+                        />
+                    </TouchableOpacity>
+
+                    <View className='w-full gap-3 mt-10'>
+                        <ButtonComponent
+                            label='Continue'
+                            variant='primary'
+                            className='w-full py-4'
+                            onPress={handleBiometric}
+                        />
+                        <ButtonComponent
+                            label='Skip'
+                            variant='secondary'
+                            className='w-full py-4'
+                            onPress={() => setBiometricView(false)}
+                        />
+                    </View>
+                </PageScrollView>
+            </View>
+        );
+    }
 
     return (
         <View className='flex-1 bg-yellow-primary'>
@@ -147,9 +186,8 @@ export default function LoginPage() {
                     <View className='flex-row justify-center gap-4'>
                         <SocialButton Icon={GmailIcon} />
                         <SocialButton Icon={FacebookIcon} />
-                        <SocialButton Icon={MarkIcon} onPress={handleBiometric} />
+                        <SocialButton Icon={MarkIcon} onPress={() => setBiometricView(true)} />
                     </View>
-
 
                     <View className='flex-row justify-center mt-6 gap-1'>
                         <Text className='text-gray-400 text-sm'>Don't have an account?</Text>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { Link, Redirect } from "expo-router";
@@ -9,11 +10,17 @@ import MenuTypes from "@/app/_components/MenuTypes";
 import BestSellerBlock from "@/app/_components/BestSellerBlock";
 import HomePageBanner from "@/app/_components/HomePageBanner";
 import RecommendBlock from "@/app/_components/RecommendBlock";
+import { auth } from "@/src/lib/auth";
 
 export default function Index() {
-    const auth = false;
+    const [isAuth, setIsAuth] = useState<boolean | null>(null);
 
-    if (!auth) return <Redirect href={ROUTES.LOGIN()} />;
+    useEffect(() => {
+        auth.isAuthenticated().then(setIsAuth);
+    }, []);
+
+    if (isAuth === null) return null;
+    if (!isAuth) return <Redirect href={ROUTES.LOGIN()} />;
 
 
     return (
