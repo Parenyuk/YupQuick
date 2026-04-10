@@ -27,7 +27,7 @@ const STEPS = [
         Icon: Step1Icon,
         title: 'Order for Food',
         description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+            'Easily set up your database tables — fast, secure, and always in sync with your latest code.',
     },
     {
         id: '2',
@@ -53,10 +53,6 @@ export default function OnboardingPage() {
     const [activeIndex, setActiveIndex] = useState(0);
     const flatListRef = useRef<FlatList>(null);
 
-    const statusBarHeight = top;
-    const bottomPadding = bottom || 20;
-    const imageHeight = (height - statusBarHeight) * (3 / 5);
-
     const onViewableItemsChanged = useRef(
         ({ viewableItems }: { viewableItems: ViewToken[] }) => {
             if (viewableItems.length > 0 && viewableItems[0].index != null) {
@@ -75,16 +71,21 @@ export default function OnboardingPage() {
 
     const renderItem = ({ item }: { item: (typeof STEPS)[number] }) => {
         const { Icon } = item;
-        return (
-            <View style={{ width, height: height - statusBarHeight }}>
-                <Image
-                    source={item.image}
-                    style={{ width, height: imageHeight }}
-                    resizeMode="cover"
-                />
 
+        return (
+            <View style={{ width, height }}>
+                {/* IMAGE */}
+                <View style={{ flex: 1 }}>
+                    <Image
+                        source={item.image}
+                        style={{ width: '100%', height: '100%' }}
+                        resizeMode="cover"
+                    />
+                </View>
+
+                {/* BOTTOM BLOCK */}
                 <View
-                    className="bg-white rounded-t-3xl -mt-6 px-6 pt-6 items-center justify-between min-h-50"
+                    className="bg-white rounded-t-3xl mb-8 px-6 pt-6 min-h-[320px]"
                 >
                     <View className="items-center">
                         <Icon width={48} height={48} />
@@ -105,7 +106,7 @@ export default function OnboardingPage() {
                                     key={i}
                                     className={`h-2 rounded-full w-6 ${
                                         i === activeIndex
-                                            ? ' bg-orange-primary'
+                                            ? 'bg-orange-primary'
                                             : 'bg-yellow-second'
                                     }`}
                                 />
@@ -113,7 +114,11 @@ export default function OnboardingPage() {
                         </View>
 
                         <ButtonComponent
-                            label={activeIndex === STEPS.length - 1 ? 'Get Started' : 'Next'}
+                            label={
+                                activeIndex === STEPS.length - 1
+                                    ? 'Get Started'
+                                    : 'Next'
+                            }
                             variant="primary"
                             className="w-full py-4"
                             onPress={handleNext}
@@ -127,7 +132,8 @@ export default function OnboardingPage() {
     return (
         <View className="flex-1 bg-white">
             <StatusBar style="dark" backgroundColor="#F5CB58" />
-            <View style={{ height: statusBarHeight }} className="bg-yellow-primary" />
+            <View style={{ height: top }} className="bg-yellow-primary" />
+
             <FlatList
                 ref={flatListRef}
                 data={STEPS}
