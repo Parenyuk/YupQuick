@@ -74,33 +74,32 @@ export default function OnboardingPage() {
 
         return (
             <View style={{ width, height }}>
-                {/* IMAGE */}
-                <View style={{ flex: 1 }}>
+                <View className="flex-1">
                     <Image
                         source={item.image}
-                        style={{ width: '100%', height: '100%' }}
+                        className="w-full h-full"
                         resizeMode="cover"
                     />
                 </View>
 
-                {/* BOTTOM BLOCK */}
                 <View
-                    className="bg-white rounded-t-3xl mb-8 px-6 pt-6 min-h-[320px]"
+                    className="bg-white rounded-t-3xl px-6 pt-8 mb-6"
+                    style={{ paddingBottom: bottom > 0 ? bottom + 16 : 32 }}
                 >
                     <View className="items-center">
                         <Icon width={48} height={48} />
 
-                        <Text className="text-orange-primary text-2xl font-bold mt-3">
+                        <Text className="text-orange-primary text-2xl font-bold mt-4 text-center">
                             {item.title}
                         </Text>
 
-                        <Text className="text-gray-500 text-sm text-center leading-5 mt-2 px-4">
+                        <Text className="text-gray-500 text-sm text-center leading-5 mt-3 px-4">
                             {item.description}
                         </Text>
                     </View>
 
-                    <View className="w-full items-center">
-                        <View className="flex-row gap-2 my-4">
+                    <View className="w-full items-center mt-8">
+                        <View className="flex-row gap-2 mb-6">
                             {STEPS.map((_, i) => (
                                 <View
                                     key={i}
@@ -131,7 +130,7 @@ export default function OnboardingPage() {
 
     return (
         <View className="flex-1 bg-white">
-            <StatusBar style="dark" backgroundColor="#F5CB58" />
+            <StatusBar style="dark" />
             <View style={{ height: top }} className="bg-yellow-primary" />
 
             <FlatList
