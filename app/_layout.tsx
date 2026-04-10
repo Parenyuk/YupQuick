@@ -11,8 +11,9 @@ export default function RootLayout() {
         <SafeAreaProvider>
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
-                    <Stack >
+                    <Stack>
                         <Stack.Screen name="index" options={{ headerShown: false }} />
+                        <Stack.Screen name="login/index" options={{ headerShown: false }} />
                     </Stack>
                     <MenuBar />
                 </View>

@@ -1,8 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import { router } from "expo-router";
 import SearchInput from "@/src/components/elements/Inputs/SearchInput";
 import BasketIcon from "@/assets/svg/basket.svg";
 import RingIcon from "@/assets/svg/ring.svg";
 import UserIcon from "@/assets/svg/user.svg";
+import { auth } from "@/src/lib/auth";
+import { ROUTES } from "@/src/constants/routes";
 
 const HeaderContent = () => {
     return (
@@ -16,9 +19,16 @@ const HeaderContent = () => {
                     <View className='p-1.5 bg-white rounded-xl'>
                         <RingIcon width={16} height={16} />
                     </View>
-                    <View className='p-1.5 bg-white rounded-xl'>
+                    <TouchableOpacity
+                        className='p-1.5 bg-white rounded-xl'
+                        activeOpacity={0.7}
+                        onPress={async () => {
+                            await auth.logout();
+                            router.replace(ROUTES.LOGIN());
+                        }}
+                    >
                         <UserIcon width={16} height={16} />
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View className='flex items-start'>
