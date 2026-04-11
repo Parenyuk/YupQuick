@@ -7,6 +7,8 @@ export const AppRoutes = {
     SIGN_UP: 'SIGN_UP',
     // App
     PROFILE: 'PROFILE',
+    FOOD: 'FOOD',
+    FOOD_DETAIL: 'FOOD_DETAIL',
 } as const;
 
 export type DynamicRoute = (options?: { id?: string | number | null }) => string;
@@ -20,4 +22,6 @@ export const ROUTES: Record<keyof typeof AppRoutes, DynamicRoute> = {
     [AppRoutes.SIGN_UP]: () => '/sign-up',
     // App
     [AppRoutes.PROFILE]: () => '/profile',
+    [AppRoutes.FOOD]: () => '/food',
+    [AppRoutes.FOOD_DETAIL]: ({ id } = {}) => `/food/${id ?? ''}`,
 };

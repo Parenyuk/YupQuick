@@ -20,6 +20,8 @@ export default function RootLayout() {
                         <Stack.Screen name="index" options={{ headerShown: false }} />
                         <Stack.Screen name="login/index" options={{ headerShown: false }} />
                         <Stack.Screen name="onboarding/index" options={{ headerShown: false }} />
+                        <Stack.Screen name="food/index" options={{ headerShown: false }} />
+                        <Stack.Screen name="food/[id]" options={{ headerShown: false }} />
                     </Stack>
                     {showMenu && <MenuBar />}
                 </View>
